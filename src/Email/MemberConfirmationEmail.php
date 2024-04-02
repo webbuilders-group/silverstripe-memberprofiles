@@ -7,6 +7,7 @@ use SilverStripe\Security\Member;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Security\Security;
+use SilverStripe\Control\Director;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Email\Email;
 
@@ -147,10 +148,10 @@ class MemberConfirmationEmail extends Email
          */
         $createdDateObj = $member->obj('Created');
 
-        $absoluteBaseURL = $this->BaseURL();
+        $absoluteBaseURL = Director::absoluteBaseURL();
         $variables = [
-            '$SiteName'       => SiteConfig::current_site_config()->Title,
-            '$LoginLink'      => Controller::join_links(
+            '$SiteName' => SiteConfig::current_site_config()->Title,
+            '$LoginLink' => Controller::join_links(
                 $absoluteBaseURL,
                 singleton(Security::class)->Link('login')
             ),
