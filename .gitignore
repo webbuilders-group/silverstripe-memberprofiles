@@ -7,3 +7,4 @@ behat.yml
 composer.lock
 index.php
 web.config
+/*.cache
