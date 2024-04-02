@@ -88,7 +88,7 @@ class MemberProfileField extends DataObject
 
     public function getCMSFields()
     {
-        Requirements::javascript('symbiote/silverstripe-memberprofiles: client/javascript/MemberProfileFieldCMS.js');
+        Requirements::javascript('webbuilders-group/silverstripe-memberprofiles: client/javascript/MemberProfileFieldCMS.js');
 
         $fields = parent::getCMSFields();
         $memberFields = $this->getMemberFields();

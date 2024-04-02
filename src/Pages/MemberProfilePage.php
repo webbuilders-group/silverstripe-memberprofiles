@@ -169,7 +169,7 @@ class MemberProfilePage extends Page
 
     private static $description = '';
 
-    private static $icon = 'symbiote/silverstripe-memberprofiles: client/images/memberprofilepage.png';
+    private static $icon = 'webbuilders-group/silverstripe-memberprofiles: client/images/memberprofilepage.png';
 
     /**
      * If profile editing is disabled, but the current user can add members,
