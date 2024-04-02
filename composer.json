@@ -44,7 +44,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Symbiote\\MemberProfiles\\": "src/"
+            "Symbiote\\MemberProfiles\\": "src/",
+            "WebbuildersGroup\\MemberProfiles\\Tests\\Bootstrap": "tests/Boostrap"
         }
     },
     "autoload-dev": {
