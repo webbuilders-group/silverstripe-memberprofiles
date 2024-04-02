@@ -8,6 +8,8 @@ use SilverStripe\Admin\SecurityAdmin;
 use SilverStripe\Security\Group;
 use SilverStripe\Forms\Form;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\RequestProcessor;
+use SilverStripe\Control\Email\Email;
 use SilverStripe\Dev\FunctionalTest;
 
 /**
@@ -19,6 +21,13 @@ use SilverStripe\Dev\FunctionalTest;
 class MemberConfirmationAdminTest extends FunctionalTest
 {
     protected static $fixture_file = 'MemberConfirmationAdminTest.yml';
+    
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Email::config()->set('admin_email', 'no-reply@example.com');
+    }
 
     public function testManualConfirmation()
     {
@@ -67,8 +76,13 @@ class MemberConfirmationAdminTest extends FunctionalTest
         // Form::disable_all_security_tokens(); // NOTE(Jake): Not in SS3 / shouldn't be testing with this anyway?
         $this->logInWithPermission('ADMIN');
 
-        $gLink = Controller::join_links($admin->Link(), 'show', $group->ID);
-        $mLink = Controller::join_links($admin->Link(), 'EditForm/field/Members/item', $member->ID, 'edit');
+        if (!class_exists(RequestProcessor::class)) {
+            $gLink = Controller::join_links($admin->Link(), 'groups/EditForm/field/groups/item', $group->ID, 'edit');
+            $mLink = Controller::join_links($admin->Link(), 'users/EditForm/field/users/item', $member->ID, 'edit');
+        } else {
+            $gLink = Controller::join_links($admin->Link(), 'show', $group->ID);
+            $mLink = Controller::join_links($admin->Link(), 'EditForm/field/Members/item', $member->ID, 'edit');
+        }
 
         $this->get($gLink);
         $this->get($mLink);

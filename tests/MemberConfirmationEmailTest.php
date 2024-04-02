@@ -9,6 +9,7 @@ use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Security\Security;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
+use SilverStripe\Control\Email\Email;
 use SilverStripe\Dev\SapphireTest;
 
 /**
@@ -20,6 +21,13 @@ use SilverStripe\Dev\SapphireTest;
 class MemberConfirmationEmailTest extends SapphireTest
 {
     protected $usesDatabase = true;
+    
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Email::config()->set('admin_email', 'no-reply@example.com');
+    }
 
     /**
      * @usesDatabase
