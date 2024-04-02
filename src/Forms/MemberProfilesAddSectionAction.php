@@ -21,22 +21,21 @@ use SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest;
  */
 class MemberProfilesAddSectionAction extends GridFieldDetailForm implements GridField_HTMLProvider
 {
-
     public function getURLHandlers($gridField)
     {
-        return array(
-            'addsection/$ClassName!' => 'handleAddSection'
-        );
+        return [
+            'addsection/$ClassName!' => 'handleAddSection',
+        ];
     }
 
     public function getHTMLFragments($grid)
     {
         $addable = $this->getAddableSections($grid);
-        $base    = $grid->Link('addsection');
-        $links   = array();
+        $base = $grid->Link('addsection');
+        $links = [];
 
         if (!$addable) {
-            return array();
+            return [];
         }
 
         foreach ($addable as $class => $title) {
@@ -51,14 +50,14 @@ class MemberProfilesAddSectionAction extends GridFieldDetailForm implements Grid
         $select->setEmptyString(_t('MemberProfiles.SECTIONTYPE', '(Section type)'));
         $select->addExtraClass('no-change-track');
 
-        $data = new ArrayData(array(
+        $data = new ArrayData([
             'Title'  => _t('MemberProfiles.ADDSECTION', 'Add Section'),
-            'Select' => $select
-        ));
+            'Select' => $select,
+        ]);
 
-        return array(
+        return [
             'buttons-before-left' => $data->renderWith('Symbiote\\MemberProfiles\\Model\\MemberProfilesAddSectionButton'),
-        );
+        ];
     }
 
     public function handleAddSection($grid, $request)
@@ -73,7 +72,7 @@ class MemberProfilesAddSectionAction extends GridFieldDetailForm implements Grid
         }
 
         $handler = $this->getItemRequestClass();
-        $record  =  $class::create();
+        $record  = $class::create();
 
         $handler = $handler::create(
             $grid,
@@ -89,10 +88,10 @@ class MemberProfilesAddSectionAction extends GridFieldDetailForm implements Grid
 
     protected function getAddableSections($grid)
     {
-        $list    = $grid->getList();
+        $list = $grid->getList();
         $classes = ClassInfo::subclassesFor(MemberProfileSection::class);
-        $result  = array();
-        $base    = $grid->Link();
+        $result = [];
+        $base = $grid->Link();
 
         array_shift($classes);
         $classes = array_diff($classes, $list->column('ClassName'));

@@ -26,11 +26,11 @@ class MemberProfileSection extends DataObject
     private static $table_name = 'MemberProfileSection';
 
     private static $db = [
-        'CustomTitle' => 'Varchar(100)'
+        'CustomTitle' => 'Varchar(100)',
     ];
 
     private static $has_one = [
-        'Parent' => MemberProfilePage::class
+        'Parent' => MemberProfilePage::class,
     ];
 
     private static $owned_by = [
@@ -43,7 +43,7 @@ class MemberProfileSection extends DataObject
 
     private static $summary_fields = [
         'DefaultTitle' => 'Title',
-        'CustomTitle'  => 'Custom Title'
+        'CustomTitle' => 'Custom Title',
     ];
 
     /**
@@ -73,10 +73,10 @@ class MemberProfileSection extends DataObject
 
         $fields->addFieldsToTab(
             'Root.Main',
-            array(
+            [
                 new ReadonlyField('DefaultTitle', _t('MemberProfiles.SECTIONTYPE', 'Section type')),
-                new HiddenField('ClassName', '')
-            ),
+                new HiddenField('ClassName', ''),
+            ],
             'CustomTitle'
         );
 
@@ -132,7 +132,7 @@ class MemberProfileSection extends DataObject
         return $this->customExtendedCan(__FUNCTION__, $member);
     }
 
-    public function canCreate($member = null, $context = array())
+    public function canCreate($member = null, $context = [])
     {
         return $this->customExtendedCan(__FUNCTION__, $member, $context);
     }
@@ -145,7 +145,7 @@ class MemberProfileSection extends DataObject
     /**
      * @return bool|null
      */
-    private function customExtendedCan($methodName, $member, $context = array())
+    private function customExtendedCan($methodName, $member, $context = [])
     {
         if (!$member) {
             $member = Security::getCurrentUser();
@@ -159,8 +159,9 @@ class MemberProfileSection extends DataObject
 
         // If has permission to edit profile page, you have permission to edit this field.
         $page = $this->Parent();
-        if ($page &&
-            $page->exists()) {
+        if ($page
+            && $page->exists()
+        ) {
             return $page->$methodName($member);
         }
 

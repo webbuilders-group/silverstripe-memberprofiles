@@ -101,12 +101,12 @@ class MemberProfilePageController extends PageController
             ));
         }
 
-        $data = array(
-            'Type'    => 'Register',
-            'Title'   => $this->obj('RegistrationTitle'),
+        $data = [
+            'Type' => 'Register',
+            'Title' => $this->obj('RegistrationTitle'),
             'Content' => $this->obj('RegistrationContent'),
-            'Form'    => $this->RegisterForm()
-        );
+            'Form' => $this->RegisterForm(),
+        ];
 
         return $this->customise($data);
     }
@@ -155,12 +155,12 @@ class MemberProfilePageController extends PageController
             }
         }
 
-        $data = array(
-            'Type'    => 'Profile',
-            'Title'   => $this->obj('ProfileTitle'),
+        $data = [
+            'Type' => 'Profile',
+            'Title' => $this->obj('ProfileTitle'),
             'Content' => $this->obj('ProfileContent'),
-            'Form'    => $form
-        );
+            'Form' => $form,
+        ];
 
         return $this->customise($data);
     }
@@ -193,8 +193,7 @@ class MemberProfilePageController extends PageController
             new MemberProfileValidator($this->Fields())
         );
 
-        if (class_exists(FormSpamProtectionExtension::class)
-            && $form->hasExtension(FormSpamProtectionExtension::class)) {
+        if (class_exists(FormSpamProtectionExtension::class) && $form->hasExtension(FormSpamProtectionExtension::class)) {
             $form->enableSpamProtection();
         }
         $this->extend('updateRegisterForm', $form);
@@ -242,10 +241,10 @@ class MemberProfilePageController extends PageController
      */
     public function afterregistration()
     {
-        return array (
-            'Title'   => $this->obj('AfterRegistrationTitle'),
-            'Content' => $this->obj('AfterRegistrationContent')
-        );
+        return  [
+            'Title' => $this->obj('AfterRegistrationTitle'),
+            'Content' => $this->obj('AfterRegistrationContent'),
+        ];
     }
 
     /**
@@ -286,7 +285,7 @@ class MemberProfilePageController extends PageController
             foreach ($e->getResult()->getMessages() as $message) {
                 if (is_array($message) && isset($message['message'])) {
                     $messages[] = $message['message'];
-                } elseif (is_string($message)) {
+                } else if (is_string($message)) {
                     $messages[] = $message;
                 }
             }
@@ -316,12 +315,12 @@ class MemberProfilePageController extends PageController
             ));
         }
 
-        $data = array(
-            'Type'    => 'Add',
-            'Title'   => _t('MemberProfiles.ADDMEMBER', 'Add Member'),
+        $data = [
+            'Type' => 'Add',
+            'Title' => _t('MemberProfiles.ADDMEMBER', 'Add Member'),
             'Content' => '',
-            'Form'    => $this->AddForm()
-        );
+            'Form' => $this->AddForm(),
+        ];
 
         return $this->customise($data);
     }
@@ -393,7 +392,7 @@ class MemberProfilePageController extends PageController
         // we need to track the selected groups against the existing user's groups - this is
         // so that we don't accidentally remove them from the list of groups
         // a user might have been placed in via other means
-        $existingIds = array();
+        $existingIds = [];
         if ($member) {
             $existing = $member->Groups();
             if ($existing && $existing->count() > 0) {
@@ -408,7 +407,7 @@ class MemberProfilePageController extends PageController
 
         if ($groupField) {
             $givenIds = $groupField->Value();
-            $groupIds = array();
+            $groupIds = [];
             if ($givenIds) {
                 foreach ($givenIds as $givenId) {
                     if (isset($allowedIds[$givenId])) {
@@ -441,13 +440,12 @@ class MemberProfilePageController extends PageController
      */
     public function confirm(HTTPRequest $request)
     {
-        if ($this->EmailType !== 'Confirmation' &&
-            $this->EmailType !== 'Validation') {
+        if ($this->EmailType !== 'Confirmation' && $this->EmailType !== 'Validation') {
             return $this->httpError(400, 'No confirmation required.');
         }
 
         $currentMember = Security::getCurrentUser();
-        $id = (int)$request->param('ID');
+        $id = (int) $request->param('ID');
         $key = $request->getVar('key');
 
         if ($currentMember) {
@@ -463,8 +461,7 @@ class MemberProfilePageController extends PageController
             ));
         }
 
-        if (!$id ||
-            !$key) {
+        if (!$id || !$key) {
             return $this->httpError(404);
         }
 
@@ -475,7 +472,7 @@ class MemberProfilePageController extends PageController
          */
         $member = DataObject::get_by_id(Member::class, $id);
         if (!$member) {
-            return $this->invalidRequest('Member #'.$id.' does not exist.');
+            return $this->invalidRequest('Member #' . $id . ' does not exist.');
         }
         if (!$member->NeedsValidation) {
             // NOTE(Jake): 2018-05-03
@@ -484,10 +481,10 @@ class MemberProfilePageController extends PageController
             // Email Setting 'Confirmation' rather than 'Validation' and you didn't
             // edit the original Email template to not include the copy about confirmation.
             //
-            return $this->invalidRequest('Member #'.$id.' does not need validation.');
+            return $this->invalidRequest('Member #' . $id . ' does not need validation.');
         }
         if (!$member->ValidationKey) {
-            return $this->invalidRequest('Member #'.$id.' does not have a validation key.');
+            return $this->invalidRequest('Member #' . $id . ' does not have a validation key.');
         }
         if ($member->ValidationKey !== $key) {
             return $this->invalidRequest('Validation key does not match.');
@@ -518,7 +515,7 @@ class MemberProfilePageController extends PageController
 
         return [
             'Title'   => $this->data()->dbObject('ConfirmationTitle'),
-            'Content' => $this->data()->dbObject('ConfirmationContent')
+            'Content' => $this->data()->dbObject('ConfirmationContent'),
         ];
     }
 
@@ -533,7 +530,7 @@ class MemberProfilePageController extends PageController
             //
             // Only expose additional information in 'dev' mode.
             //
-            $additionalText .= ' '.$debugText;
+            $additionalText .= ' ' . $debugText;
         }
 
         $this->getResponse()->setStatusCode(500);
@@ -542,7 +539,7 @@ class MemberProfilePageController extends PageController
             'Content' => _t(
                 'MemberProfiles.ERRORCONFIRMATION',
                 'An unexpected error occurred.'
-            ).$additionalText,
+            ) . $additionalText,
         ];
     }
 
@@ -571,7 +568,7 @@ class MemberProfilePageController extends PageController
             foreach ($e->getResult()->getMessages() as $message) {
                 if (is_array($message) && isset($message['message'])) {
                     $messages[] = $message['message'];
-                } elseif (is_string($message)) {
+                } else if (is_string($message)) {
                     $messages[] = $message;
                 }
             }
@@ -587,8 +584,7 @@ class MemberProfilePageController extends PageController
         // sending an email to the member.
         if ($this->RequireApproval) {
             $groups = $this->ApprovalGroups();
-            if (!$groups ||
-                $groups->count() == 0) {
+            if (!$groups || $groups->count() == 0) {
                 // If nothing is configured, fallback to ADMIN
                 $groups = Permission::get_groups_by_permission('ADMIN');
             }
@@ -618,11 +614,11 @@ class MemberProfilePageController extends PageController
 
                 $mail->setSubject("Registration Approval Requested for $config->Title");
                 $mail->setHTMLTemplate('Symbiote\\MemberProfiles\\Email\\MemberRequiresApprovalEmail');
-                $mail->setData(array(
-                    'SiteConfig'  => $config,
-                    'Member'      => $member,
-                    'ApproveLink' => Director::absoluteURL($approve)
-                ));
+                $mail->setData([
+                    'SiteConfig' => $config,
+                    'Member' => $member,
+                    'ApproveLink' => Director::absoluteURL($approve),
+                ]);
 
                 foreach ($emails as $email) {
                     if (!Email::is_valid_address($email)) {
@@ -644,14 +640,14 @@ class MemberProfilePageController extends PageController
             switch ($this->EmailType) {
                 case 'None':
                     // Does not require anything
-                break;
+                    break;
 
                 case 'Confirmation':
                 case 'Validation':
                     // Must activate themselves via the confirmation email
                     $email = MemberConfirmationEmail::create($this->data(), $member);
                     $email->send();
-                break;
+                    break;
             }
         }
 
@@ -727,8 +723,7 @@ class MemberProfilePageController extends PageController
                 $field->setDescription($profileField->Note);
             }
 
-            if ($context === 'Registration' &&
-                $profileField->DefaultValue) {
+            if ($context === 'Registration' && $profileField->DefaultValue) {
                 $field->setValue($profileField->DefaultValue);
             }
 

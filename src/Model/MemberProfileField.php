@@ -37,23 +37,23 @@ class MemberProfileField extends DataObject
     private static $table_name = 'MemberProfileField';
 
     private static $db = [
-        'ProfileVisibility'       => 'Enum("Edit, Readonly, Hidden", "Hidden")',
-        'RegistrationVisibility'  => 'Enum("Edit, Readonly, Hidden", "Hidden")',
-        'MemberListVisible'       => 'Boolean',
-        'PublicVisibility'        => 'Enum("Display, MemberChoice, Hidden", "Hidden")',
+        'ProfileVisibility' => 'Enum("Edit, Readonly, Hidden", "Hidden")',
+        'RegistrationVisibility' => 'Enum("Edit, Readonly, Hidden", "Hidden")',
+        'MemberListVisible' => 'Boolean',
+        'PublicVisibility' => 'Enum("Display, MemberChoice, Hidden", "Hidden")',
         'PublicVisibilityDefault' => 'Boolean',
-        'MemberField'             => 'Varchar(100)',
-        'CustomTitle'             => 'Varchar(100)',
-        'DefaultValue'            => 'Text',
-        'Note'                    => 'Varchar(255)',
-        'CustomError'             => 'Varchar(255)',
-        'Unique'                  => 'Boolean',
-        'Required'                => 'Boolean',
-        'Sort'                    => 'Int'
+        'MemberField' => 'Varchar(100)',
+        'CustomTitle' => 'Varchar(100)',
+        'DefaultValue' => 'Text',
+        'Note' => 'Varchar(255)',
+        'CustomError' => 'Varchar(255)',
+        'Unique' => 'Boolean',
+        'Required' => 'Boolean',
+        'Sort' => 'Int',
     ];
 
     private static $has_one = [
-        'ProfilePage' => MemberProfilePage::class
+        'ProfilePage' => MemberProfilePage::class,
     ];
 
     private static $owned_by = [
@@ -65,12 +65,12 @@ class MemberProfileField extends DataObject
     ];
 
     private static $summary_fields = [
-        'DefaultTitle'           => 'Field',
-        'ProfileVisibility'      => 'Profile Visibility',
+        'DefaultTitle' => 'Field',
+        'ProfileVisibility' => 'Profile Visibility',
         'RegistrationVisibility' => 'Registration Visibility',
-        'CustomTitle'            => 'Custom Title',
-        'Unique'                 => 'Unique',
-        'Required'               => 'Required'
+        'CustomTitle' => 'Custom Title',
+        'Unique' => 'Unique',
+        'Required' => 'Required',
     ];
 
     private static $default_sort = 'Sort';
@@ -103,7 +103,7 @@ class MemberProfileField extends DataObject
          */
         $tab = $fields->fieldByName('Root.Main');
         if ($tab) {
-            $tab->getChildren()->changeFieldOrder(array(
+            $tab->getChildren()->changeFieldOrder([
                 'CustomTitle',
                 'DefaultValue',
                 'Note',
@@ -115,7 +115,7 @@ class MemberProfileField extends DataObject
                 'CustomError',
                 'Unique',
                 'Required'
-            ));
+            ]);
         }
 
         $fields->unshift(new ReadonlyField(
@@ -140,7 +140,7 @@ class MemberProfileField extends DataObject
                 $memberField->getSource()
             ));
             $default->setEmptyString(' ');
-        } elseif ($memberField instanceof TextField) {
+        } else if ($memberField instanceof TextField) {
             $fields->replaceField('DefaultValue', new TextField(
                 'DefaultValue',
                 _t('MemberProfiles.DEFAULTVALUE', 'Default Value')
@@ -153,13 +153,12 @@ class MemberProfileField extends DataObject
          * @var \SilverStripe\Forms\SelectField|null $publicVisibilityField
          */
         $publicVisibilityField = $fields->dataFieldByName('PublicVisibility');
-        if ($publicVisibilityField &&
-            $publicVisibilityField->hasMethod('setSource')) {
-            $publicVisibilityField->setSource(array(
+        if ($publicVisibilityField && $publicVisibilityField->hasMethod('setSource')) {
+            $publicVisibilityField->setSource([
                 'Display'      => _t('MemberProfiles.ALWAYSDISPLAY', 'Always display'),
                 'MemberChoice' => _t('MemberProfiles.MEMBERCHOICE', 'Allow the member to choose'),
-                'Hidden'       => _t('MemberProfiles.DONTDISPLAY', 'Do not display')
-            ));
+                'Hidden'       => _t('MemberProfiles.DONTDISPLAY', 'Do not display'),
+            ]);
         }
 
         $fields->dataFieldByName('PublicVisibilityDefault')->setTitle(_t(
@@ -250,7 +249,7 @@ class MemberProfileField extends DataObject
     {
         return in_array(
             $this->MemberField,
-            array(Config::inst()->get(Member::class, 'unique_identifier_field'), 'Password')
+            [Config::inst()->get(Member::class, 'unique_identifier_field'), 'Password']
         );
     }
 
@@ -310,7 +309,7 @@ class MemberProfileField extends DataObject
         return $this->customExtendedCan(__FUNCTION__, $member);
     }
 
-    public function canCreate($member = null, $context = array())
+    public function canCreate($member = null, $context = [])
     {
         return $this->customExtendedCan(__FUNCTION__, $member, $context);
     }
@@ -323,7 +322,7 @@ class MemberProfileField extends DataObject
     /**
      * @return bool|null
      */
-    private function customExtendedCan($methodName, $member, $context = array())
+    private function customExtendedCan($methodName, $member, $context = [])
     {
         if (!$member) {
             $member = Security::getCurrentUser();
@@ -337,8 +336,7 @@ class MemberProfileField extends DataObject
 
         // If has permission to edit profile page, you have permission to edit this field.
         $page = $this->ProfilePage();
-        if ($page &&
-            $page->exists()) {
+        if ($page && $page->exists()) {
             return $page->$methodName($member);
         }
 

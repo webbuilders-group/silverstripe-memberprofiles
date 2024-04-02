@@ -76,7 +76,7 @@ class MemberProfileViewer extends PageController
             // We may want to enable a flag so that ADMIN users are automatically omitted from this list
             // by default.
             //
-            //$members = $members->filter('ID:not', Permission::get_members_by_permission('ADMIN')->map('ID', 'ID')->toArray());
+            // $members = $members->filter('ID:not', Permission::get_members_by_permission('ADMIN')->map('ID', 'ID')->toArray());
         }
         $members = PaginatedList::create($members, $request);
 
@@ -90,23 +90,23 @@ class MemberProfileViewer extends PageController
                 if ($field->PublicVisibility == 'MemberChoice'
                     && !in_array($field->MemberField, $public)
                 ) {
-                    $value =  null;
+                    $value = null;
                 } else {
                     $value = $member->{$field->MemberField};
                 }
 
-                $cols->push(new ArrayData(array(
-                    'Name'     => $field->MemberField,
-                    'Title'    => $field->Title,
-                    'Value'    => $value,
+                $cols->push(new ArrayData([
+                    'Name' => $field->MemberField,
+                    'Title' => $field->Title,
+                    'Value' => $value,
                     'Sortable' => $member->hasDatabaseField($field->MemberField),
-                    'Link'     => $link
-                )));
+                    'Link' => $link,
+                ]));
             }
 
-            $list->push($member->customise(array(
-                'Fields' => $cols
-            )));
+            $list->push($member->customise([
+                'Fields' => $cols,
+            ]));
         }
         $list = PaginatedList::create($list, $request);
         $list->setLimitItems(false);
@@ -115,10 +115,10 @@ class MemberProfileViewer extends PageController
         $this->data()->Title  = _t('MemberProfiles.MEMBERLIST', 'Member List');
         $this->data()->Parent = $this->getParent();
 
-        $controller = $this->customise(array(
-            'Type'    => 'List',
-            'Members' => $list
-        ));
+        $controller = $this->customise([
+            'Type' => 'List',
+            'Members' => $list,
+        ]);
 
         return $controller;
     }
@@ -160,12 +160,12 @@ class MemberProfileViewer extends PageController
         );
         $this->data()->Parent = $this->getParent();
 
-        $controller = $this->customise(array(
-            'Type'     => 'View',
-            'Member'   => $member,
+        $controller = $this->customise([
+            'Type' => 'View',
+            'Member' => $member,
             'Sections' => $sectionsList,
-            'IsSelf'   => Security::getCurrentUser() && $member->ID == Security::getCurrentUser()->ID,
-        ));
+            'IsSelf' => Security::getCurrentUser() && $member->ID == Security::getCurrentUser()->ID,
+        ]);
 
         return $controller;
     }
