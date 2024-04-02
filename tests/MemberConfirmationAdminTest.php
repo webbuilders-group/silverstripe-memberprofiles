@@ -18,7 +18,7 @@ use SilverStripe\Dev\FunctionalTest;
  */
 class MemberConfirmationAdminTest extends FunctionalTest
 {
-    public static $fixture_file = 'MemberConfirmationAdminTest.yml';
+    protected static $fixture_file = 'MemberConfirmationAdminTest.yml';
 
     public function testManualConfirmation()
     {
