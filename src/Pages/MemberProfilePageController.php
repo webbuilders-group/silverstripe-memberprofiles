@@ -710,8 +710,8 @@ class MemberProfilePageController extends PageController
             }
 
             if ($name === 'Password') {
-                Requirements::javascript("silverstripe/admin: thirdparty/jquery/jquery.js");
-                Requirements::javascript("webbuilders-group/silverstripe-memberprofiles: client/javascript/ConfirmedPasswordField.js");
+                Requirements::javascript('https://code.jquery.com/jquery-3.7.1.min.js');
+                Requirements::javascript('webbuilders-group/silverstripe-memberprofiles: client/javascript/ConfirmedPasswordField.js');
             }
 
             // The follow two if-conditions were added since the SS4 migration because a Password label disappeared
