@@ -29,6 +29,7 @@ de:
     EDITPROFILE: 'Profil bearbeiten'
     EMAIL: E-Mail
     EMAILCONFIRMATION: 'Bestätigung per E-Mail'
+    EMAILCONFIRMATIONDESC: 'Bestätigung per E-Mail'
     EMAILCONTENT: E-Mail-Inhalt
     EMAILFROM: E-Mail-Absender
     EMAILSETTINGS: E-Mail-Einstellungen
@@ -36,6 +37,7 @@ de:
     EMAILTEMPLATE: E-Mail-Vorlage
     EMAILVALID: 'E-Mail-Validierung einschalten'
     EMAILVALIDATION: E-Mail-Validierung
+    EMAILVALIDATIONDESC: E-Mail-Validierung
     FIELDOPTIONS: 'Felder Optionen'
     FIELDS: Felder
     GROUPS: Guppen
@@ -67,7 +69,6 @@ de:
     REDIRECT: Umleiten
     REDIRECTAFTERREG: 'Nach Anmeldung umleiten'
     REDIRECTTOPAGE: 'Zu Seite umleiten'
-    REDIRECT_TARGET: 'Zu dieser Seite umleiten'
     REGISTER: Registrieren
     REGISTERED: Registriert
     REGISTRATION: Registrierung

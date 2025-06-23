@@ -167,7 +167,7 @@ class MemberProfilePage extends Page
         ]
     ];
 
-    private static $description = '';
+    private static $description = 'Profile & registration pages for members';
 
     private static $icon = 'webbuilders-group/silverstripe-memberprofiles: client/images/memberprofilepage.png';
 
@@ -320,8 +320,8 @@ class MemberProfilePage extends Page
                         'EmailType',
                         _t('MemberProfiles.EMAILSETTINGS', 'Email Settings'),
                         [
-                            'Validation'   => _t('MemberProfiles.EMAILVALIDATION', 'Send a confirmation email (confirmation required to login)'),
-                            'Confirmation' => _t('MemberProfiles.EMAILCONFIRMATION', 'Send a confirmation email (confirmation NOT required to login)'),
+                            'Validation'   => _t('MemberProfiles.EMAILVALIDATIONDESC', 'Send a confirmation email (confirmation required to login)'),
+                            'Confirmation' => _t('MemberProfiles.EMAILCONFIRMATIONDESC', 'Send a confirmation email (confirmation NOT required to login)'),
                             'None'         => _t('MemberProfiles.NONE', 'None'),
                         ]
                     )->setRightTitle('For additional settings, check the "Settings" tab.'),

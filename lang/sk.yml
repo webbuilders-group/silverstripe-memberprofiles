@@ -32,6 +32,7 @@ sk:
     DONTDISPLAY: Nezobrazovať
     EDITPROFILE: 'Upraviť profil'
     EMAILCONFIRMATION: 'Zaslať potvrdzovací e-mail'
+    EMAILCONFIRMATIONDESC: 'Zaslať potvrdzovací e-mail'
     EMAILCONTENT: 'Obsah e-mailu'
     EMAILFROM: 'E-mail odosielateľa'
     EMAILSETTINGS: 'Nastavenia e-mailu'
@@ -39,6 +40,7 @@ sk:
     EMAILTEMPLATE: 'Vzor e-mailovej správy'
     EMAILVALID: 'E-Mail-Validierung einschalten'
     EMAILVALIDATION: 'Vyžadovať overenie e-mailu'
+    EMAILVALIDATIONDESC: 'Vyžadovať overenie e-mailu'
     Email: E-Mail
     FIELDS: 'Políčka profilu'
     GROUPS: Skupiny
