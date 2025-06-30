@@ -21,12 +21,13 @@ use SilverStripe\Dev\FunctionalTest;
 class MemberConfirmationAdminTest extends FunctionalTest
 {
     protected static $fixture_file = 'MemberConfirmationAdminTest.yml';
-    
+
     protected function setUp(): void
     {
         parent::setUp();
 
         Email::config()->set('admin_email', 'no-reply@example.com');
+        Member::config()->set('require_sudo_mode', false);
     }
 
     public function testManualConfirmation()
@@ -35,7 +36,7 @@ class MemberConfirmationAdminTest extends FunctionalTest
         $this->assertEquals(true, (bool) $member->NeedsValidation);
 
         $this->getSecurityAdmin();
-        $this->submitForm(
+        $response = $this->submitForm(
             'Form_ItemEditForm',
             'action_doSave',
             [
@@ -73,7 +74,6 @@ class MemberConfirmationAdminTest extends FunctionalTest
         $admin  = new SecurityAdmin();
         $group  = $this->objFromFixture(Group::class, 'group');
 
-        // Form::disable_all_security_tokens(); // NOTE(Jake): Not in SS3 / shouldn't be testing with this anyway?
         $this->logInWithPermission('ADMIN');
 
         if (!class_exists(RequestProcessor::class)) {
