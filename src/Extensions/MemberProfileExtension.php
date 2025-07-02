@@ -2,6 +2,7 @@
 
 namespace Symbiote\MemberProfiles\Extensions;
 
+use SilverStripe\Core\Extension;
 use Symbiote\MemberProfiles\Pages\MemberProfilePage;
 use Symbiote\MemberProfiles\Email\MemberConfirmationEmail;
 use SilverStripe\Forms\CheckboxSetField;
@@ -9,8 +10,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\DropdownField;
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\ORM\ValidationResult;
+use SilverStripe\Core\Validation\ValidationResult;
 
 /**
  * Adds validation fields to the Member object, as well as exposing the user's
@@ -18,7 +18,7 @@ use SilverStripe\ORM\ValidationResult;
  *
  * @package silverstripe-memberprofiles
  */
-class MemberProfileExtension extends DataExtension
+class MemberProfileExtension extends Extension
 {
     private static $db = [
         'ValidationKey'   => 'Varchar(40)',
@@ -33,7 +33,7 @@ class MemberProfileExtension extends DataExtension
 
     public function getPublicFields()
     {
-        return (array) unserialize($this->owner->getField('PublicFieldsRaw'));
+        return (array) unserialize(($this->owner->getField('PublicFieldsRaw')) ? $this->owner->getField('PublicFieldsRaw') : '');
     }
 
     public function setPublicFields($fields)

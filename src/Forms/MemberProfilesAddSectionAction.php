@@ -5,7 +5,7 @@ namespace Symbiote\MemberProfiles\Forms;
 use SilverStripe\Control\Controller;
 use SilverStripe\View\Requirements;
 use SilverStripe\Forms\DropdownField;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use Symbiote\MemberProfiles\Model\MemberProfileSection;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\ClassInfo;

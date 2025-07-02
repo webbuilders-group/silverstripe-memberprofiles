@@ -2,8 +2,8 @@
 
 namespace Symbiote\MemberProfiles\Model;
 
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\List\ArrayList;
+use SilverStripe\Model\ArrayData;
 
 /**
  * A profile section that displays a list of fields that have been marked as
@@ -21,7 +21,7 @@ class MemberProfileFieldsSection extends MemberProfileSection
         return _t('MemberProfiles.PROFILEFIELDSLIST', 'Profile Fields List');
     }
 
-    public function forTemplate()
+    public function forTemplate(): string
     {
         return $this->renderWith(MemberProfileFieldsSection::class);
     }

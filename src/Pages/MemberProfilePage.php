@@ -95,6 +95,14 @@ class MemberProfilePage extends Page
         'ConfirmationContent' => 'HTMLText',
     ];
 
+    // Disable scaffolding for all fields except the page title - fixes duplicate fields error
+    private static array $scaffold_cms_fields_settings = [
+        'includeRelations' => false,
+        'restrictFields' => [
+            'Title'
+        ],
+    ];
+
     private static $has_one = [
         'PostRegistrationTarget' => SiteTree::class,
     ];
@@ -167,9 +175,9 @@ class MemberProfilePage extends Page
         ]
     ];
 
-    private static $description = 'Profile & registration pages for members';
+    private static $class_description = 'Profile & registration pages for members';
 
-    private static $icon = 'webbuilders-group/silverstripe-memberprofiles: client/images/memberprofilepage.png';
+    private static $cms_icon = 'webbuilders-group/silverstripe-memberprofiles: client/images/memberprofilepage.png';
 
     /**
      * If profile editing is disabled, but the current user can add members,

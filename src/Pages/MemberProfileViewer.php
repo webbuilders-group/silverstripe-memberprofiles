@@ -6,9 +6,9 @@ use PageController;
 
 use Exception;
 use SilverStripe\Control\RequestHandler;
-use SilverStripe\ORM\PaginatedList;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\List\PaginatedList;
+use SilverStripe\Model\List\ArrayList;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\Security\Member;
 use SilverStripe\Control\Controller;
 use SilverStripe\View\ViewableData;

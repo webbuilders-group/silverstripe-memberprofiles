@@ -20,7 +20,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\LiteralField;
-use SilverStripe\ORM\ValidationException;
+use SilverStripe\Core\Validation\ValidationException;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\SpamProtection\Extension\FormSpamProtectionExtension;
@@ -379,7 +379,7 @@ class MemberProfilePageController extends PageController
      * @param Form   $form
      * @param Member $member
      */
-    protected function getSettableGroupIdsFrom(Form $form, Member $member = null)
+    protected function getSettableGroupIdsFrom(Form $form, ?Member $member = null)
     {
         // first off check to see if groups were selected by the user. If so, we want
         // to remove that control from the form list (just in case someone's sent through an

@@ -117,7 +117,7 @@ class MemberProfileSection extends DataObject
      *
      * @return string
      */
-    public function forTemplate()
+    public function forTemplate(): string
     {
         throw new Exception("Please implement forTemplate() on {get_class($this)}.");
     }

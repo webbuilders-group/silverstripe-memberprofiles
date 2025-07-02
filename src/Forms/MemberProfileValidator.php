@@ -7,15 +7,15 @@ use SilverStripe\Security\Member;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Security\Security;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 /**
  * This validator provides the unique and required functionality for {@link MemberProfileField}s.
  *
  * @package silverstripe-memberprofiles
  */
-class MemberProfileValidator extends RequiredFields
+class MemberProfileValidator extends RequiredFieldsValidator
 {
     /**
      * @var FieldList|MemberProfileField[] $fields

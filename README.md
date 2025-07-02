@@ -6,19 +6,19 @@
 [![Total Downloads](https://poser.pugx.org/webbuilders-group/silverstripe-memberprofiles/downloads.svg)](https://packagist.org/packages/webbuilders-group/silverstripe-memberprofiles)
 [![License](https://poser.pugx.org/webbuilders-group/silverstripe-memberprofiles/license.svg)](https://github.com/webbuilders-group/silverstripe-memberprofiles/blob/master/LICENSE.md)
 
-A new page type is added in the CMS called a "Member Profile Page". This allows you to create a page that allows users to register and/or manage their profile. 
+A new page type is added in the CMS called a "Member Profile Page". This allows you to create a page that allows users to register and/or manage their profile.
 
 Registration can be enabled or disabled in the "Behaviour" tab.
 
 ## Composer Install
 
 ```
-composer require webbuilders-group/silverstripe-memberprofiles:~4.1
+composer require webbuilders-group/silverstripe-memberprofiles:~5.0
 ```
 
 ## Requirements
 
-* SilverStripe 4.0+ or 5.0+
+* SilverStripe ~6.0
 
 ## Documentation
 

@@ -92,6 +92,6 @@ en:
     PLURALNAME: 'Member Profile Fields'
     SINGULARNAME: 'Member Profile Field'
   Symbiote\MemberProfiles\Pages\MemberProfilePage:
-    DESCRIPTION: 'Profile & registration pages for members'
+    CLASS_DESCRIPTION: 'Profile & registration pages for members'
     PLURALNAME: 'Member Profile Pages'
     SINGULARNAME: 'Member Profile Page'

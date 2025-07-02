@@ -2,6 +2,7 @@
 
 namespace Symbiote\MemberProfiles\Forms;
 
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Member;
 use SilverStripe\ORM\DataObjectInterface;
@@ -122,9 +123,9 @@ class CheckableVisibilityField extends FormField
         }
     }
 
-    public function validate($validator)
+    public function validate(): ValidationResult
     {
-        return $this->child->validate($validator);
+        return $this->child->validate();
     }
 
     public function Value()
