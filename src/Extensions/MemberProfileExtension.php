@@ -33,7 +33,7 @@ class MemberProfileExtension extends Extension
 
     public function getPublicFields()
     {
-        return (array) unserialize(($this->owner->getField('PublicFieldsRaw')) ? $this->owner->getField('PublicFieldsRaw') : '');
+        return (array) unserialize($this->owner->getField('PublicFieldsRaw') ?: '');
     }
 
     public function setPublicFields($fields)
